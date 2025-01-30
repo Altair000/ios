@@ -276,3 +276,6 @@ def set_webhook():
 def delete_webhook():
     bot.delete_webhook()
     return "Webhook eliminada correctamente", 200
+
+if __name__ == '__main__':
+    bot.infinity_polling()
