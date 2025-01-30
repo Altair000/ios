@@ -293,7 +293,3 @@ def iniciar_en_hilo(chat_id, update_progress):
 
     # Iniciar el hilo
     thread.start()
-
-    # Esperar a que el hilo termine y luego eliminarlo de la lista
-    thread.join()
-    active_threads.remove(thread)
