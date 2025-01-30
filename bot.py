@@ -4,7 +4,7 @@ from datetime import datetime
 
 # Módulos de terceros
 import telebot
-from flask import Flask, request
+from fastapi import FastAPI, Request
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 # Módulos locales
@@ -14,8 +14,8 @@ from utils.db import obtener_datos_usuario, insertar_usuario
 from utils.registro import iniciar_timeout, cancelar_timeout, validar_voucher, generar_voucher
 from utils.crear_apple_id import iniciar_en_hilo
 
-# Instancia de Flask
-app = Flask(__name__)
+# Instancia de FastAPI
+app = FastAPI()
 
 # Variables globales
 WEBHOOK_URL = f"https://{os.getenv('KOYEB_APP_NAME')}.koyeb.app/{TOKEN}" # Establecer webhook automáticamente
@@ -250,32 +250,29 @@ def procesar_voucher(message):
     else:
         bot.send_message(chat_id, mensaje)  # Envía el mensaje de error al usuario
 
-@app.route("/")
-def home():
-    return "Bot funcionando"
+@app.get("/")
+async def home():
+    return {"message": "Bot funcionando"}, 200
 
-# Ruta de Flask para el webhook
-@app.route(f"/{TOKEN}", methods=["POST"])  # <-- Agrega la barra al final
-def receive_update():
-    json_update = request.get_data().decode("utf-8")
-    update = telebot.types.Update.de_json(json_update)
+# Ruta del webhook de Telegram
+@app.post(f"/{TOKEN}")
+async def receive_update(request: Request):
+    json_update = await request.body()
+    update = telebot.types.Update.de_json(json_update.decode("utf-8"))
     bot.process_new_updates([update])
-    return "OK", 200
+    return {"status": "OK"}, 200
 
-# Establece la webhook al iniciar
-@app.route("/set_webhook", methods=["GET", "POST"])
-def set_webhook():
+# Establece el webhook
+@app.get("/set_webhook")
+async def set_webhook():
     success = bot.set_webhook(url=WEBHOOK_URL + f"/{TOKEN}")
     if success:
-        return "Webhook configurada correctamente", 200
+        return {"message": "Webhook configurada correctamente"}, 200
     else:
-        return "Fallo al configurar el webhook", 500
+        return {"message": "Fallo al configurar el webhook"}, 500
 
-# Elimina la webhook si es necesario
-@app.route("/delete_webhook", methods=["GET", "POST"])
-def delete_webhook():
+# Elimina el webhook
+@app.get("/delete_webhook")
+async def delete_webhook():
     bot.delete_webhook()
-    return "Webhook eliminada correctamente", 200
-
-if __name__ == '__main__':
-    bot.infinity_polling()
+    return {"message": "Webhook eliminada correctamente"}, 200
