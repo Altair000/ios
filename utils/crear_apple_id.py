@@ -259,8 +259,7 @@ def iniciar(chat_id, update_progress):
             step_count += 1
             update_progress(mail_otp_response_text, (step_count / total_steps) * 100)
             time.sleep(1)
-
-            input()
+            print("Correcto")
 
             # Simular paso final
             step_count += 1
