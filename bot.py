@@ -259,9 +259,9 @@ def home():
     return "Bot funcionando"
 
 # Ruta de Flask para el webhook
-@app.route(f"/{TOKEN}", methods=["POST"])
+@app.route(f"/{TOKEN}/", methods=["POST"])  # <-- Agrega la barra al final
 def receive_update():
-    json_update = request.stream.read().decode("utf-8")
+    json_update = request.get_data().decode("utf-8")
     update = telebot.types.Update.de_json(json_update)
     bot.process_new_updates([update])
     return "OK", 200
@@ -280,6 +280,3 @@ def set_webhook():
 def delete_webhook():
     bot.delete_webhook()
     return "Webhook eliminada correctamente", 200
-
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8080)
