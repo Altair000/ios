@@ -239,11 +239,7 @@ def procesar_voucher(message):
         try:
             # Llamar al proceso principal pasando la función de actualización
             iniciar_en_hilo(chat_id, update_progress)
-            bot.edit_message_text(
-                chat_id=chat_id,
-                message_id=msg.message_id,
-                text="✅ ¡Proceso completado!\n[████████████████████] 100%"
-            )
+
         except Exception as e:
             bot.edit_message_text(
                 chat_id=chat_id,

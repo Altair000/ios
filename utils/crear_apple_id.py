@@ -293,3 +293,9 @@ def iniciar_en_hilo(chat_id, update_progress):
 
     # Iniciar el hilo
     thread.start()
+
+    # Esperar a que el hilo termine y luego actualizar el mensaje
+    thread.join()
+
+    # Una vez el hilo termine, actualizamos el mensaje final
+    update_progress("✅ ¡Proceso completado!", 100)
