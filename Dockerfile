@@ -37,4 +37,4 @@ COPY . .
 EXPOSE 8080
 
 # Comando para iniciar la aplicación
-CMD ["python3", "wsgi.py"]
+CMD ["gunicorn", "wsgi:app", "--bind", "0.0.0.0:8080"]
