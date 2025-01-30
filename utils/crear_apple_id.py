@@ -48,6 +48,7 @@ def iniciar(chat_id, update_progress):
 
             page.goto('https://account.apple.com/account', timeout=60000)
             page.wait_for_load_state("load")
+            print("Iniciado")
 
             # Buscar el iframe
             # Paso 2: Buscar el iframe
