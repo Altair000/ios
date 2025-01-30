@@ -259,7 +259,7 @@ def home():
     return "Bot funcionando"
 
 # Ruta de Flask para el webhook
-@app.route(f"/{TOKEN}/", methods=["POST"])  # <-- Agrega la barra al final
+@app.route(f"/{TOKEN}", methods=["POST"])  # <-- Agrega la barra al final
 def receive_update():
     json_update = request.get_data().decode("utf-8")
     update = telebot.types.Update.de_json(json_update)
