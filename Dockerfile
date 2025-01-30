@@ -14,4 +14,4 @@ RUN playwright install && playwright install-deps
 # Copiar la aplicación
 COPY . .
 
-CMD ["gunicorn", "wsgi:app", "--bind", "0.0.0.0:8080"]
+CMD ["gunicorn", "wsgi:app", "--bind", "0.0.0.0:8080", "-k", "gevent"]
