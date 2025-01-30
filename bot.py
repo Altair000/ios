@@ -237,6 +237,7 @@ def procesar_voucher(message):
             )
 
         try:
+            print("pp")
             # Llamar al proceso principal pasando la función de actualización
             iniciar_en_hilo(chat_id, update_progress)
 

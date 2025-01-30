@@ -4,7 +4,6 @@ import time
 # Bibliotecas externas
 import threading
 from collections import deque
-from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright, TimeoutError
 
 # Bibliotecas locales
@@ -21,6 +20,7 @@ Función que manejará el proceso de Creación de Apple Id
 """
 def iniciar(chat_id, update_progress):
     datos = obtener_datos_de_apple_id(chat_id)
+    print(datos)
 
     # Asignar cada valor de la tupla a variables
     NOMBRE, APELLIDO, FECHA, EMAIL, PASS = datos
