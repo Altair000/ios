@@ -1,0 +1,8 @@
+psycopg2-binary~=2.9.10
+bs4~=0.0.2
+beautifulsoup4~=4.12.3
+playwright~=1.49.1
+telebot~=0.0.5
+pyTelegramBotAPI~=4.23.0
+twilio~=9.4.3
+flask
