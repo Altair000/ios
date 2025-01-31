@@ -18,7 +18,7 @@ from utils.crear_apple_id import iniciar_en_hilo
 app = FastAPI()
 
 # Variables globales
-WEBHOOK_URL = f"https://{os.getenv('KOYEB_APP_NAME')}.koyeb.app/{TOKEN}" # Establecer webhook automáticamente
+WEBHOOK_URL = f"https://ios-zx8z.onrender.com/{TOKEN}" # Establecer webhook automáticamente
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
