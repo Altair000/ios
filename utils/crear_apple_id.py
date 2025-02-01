@@ -38,7 +38,7 @@ def iniciar(chat_id, update_progress):
 
     # Configuración de proxies rotativos contra bloqueos.
     INTENTOS_MAX = 4
-    proxy = "http://cdnqrvkp-rotate:3ow7gj50v1l6@p.webshare.io:80/"
+    proxy = "http://uhmeoiob-rotate:nkr2avsctr03@p.webshare.io:80/"
     # Variable para saber si se completó el proceso
     proceso_completado = False
 
@@ -285,6 +285,8 @@ def iniciar(chat_id, update_progress):
 
             except Exception as e:
                 update_progress(f"Error en el proceso: {str(e)}", (step_count / total_steps) * 100)
+                step_count = 0
+                time.sleep(5)
                 browser.close()
 
     if not proceso_completado:
