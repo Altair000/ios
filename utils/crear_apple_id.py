@@ -57,7 +57,8 @@ def iniciar(chat_id, update_progress):
                 update_progress("Navegando a la página inicial...", (step_count / total_steps) * 100)
                 time.sleep(1)  # Simula el tiempo necesario
 
-                page.goto('https://account.apple.com/account#', timeout=60000)
+                s = page.goto('https://account.apple.com/account#', timeout=60000)
+                bot.send_message(chat_id, "Status code:", s.status)
                 page.wait_for_load_state("load")
                 print("Iniciado")
 
