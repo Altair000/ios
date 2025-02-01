@@ -7,6 +7,7 @@ from collections import deque
 from playwright.sync_api import sync_playwright, TimeoutError
 
 # Bibliotecas locales
+from configs.bot_config import bot
 from configs.twilios import numero_twilio_formateado
 from utils.db import obtener_datos_de_apple_id
 from utils.handlers import iniciar_manejador_captcha as manejar_captcha, iniciar_manejador_otp_mail as manejar_otp_mail
@@ -283,7 +284,8 @@ def iniciar(chat_id, update_progress):
                 break  # Salir del bucle de reintentos
 
             except Exception as e:
-                raise RuntimeError(f"Error en el proceso: {str(e)}")
+                bot.send_message(chat_id, f"Error en el proceso: {str(e)}")
+                browser.close()
 
     if not proceso_completado:
         raise RuntimeError("Todos los intentos de creación de Apple ID fallaron.")
