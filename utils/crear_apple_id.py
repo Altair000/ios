@@ -38,6 +38,8 @@ def iniciar(chat_id, update_progress):
     # Configuración de proxies rotativos contra bloqueos.
     INTENTOS_MAX = 4
     proxy = "http://cdnqrvkp-rotate:3ow7gj50v1l6@p.webshare.io:80/"
+    # Variable para saber si se completó el proceso
+    proceso_completado = False
 
     for intento in range(INTENTOS_MAX):
         update_progress(f"Rotando proxies. Intento {intento} de un máximo de: {INTENTOS_MAX}...", (step_count / total_steps) * 100)
@@ -275,8 +277,16 @@ def iniciar(chat_id, update_progress):
                 update_progress("Finalizando creación de Apple ID...", (step_count / total_steps) * 100)
                 time.sleep(1)
 
+                # Si llegamos hasta acá sin excepciones, marcamos el proceso como completado.
+                proceso_completado = True
+                browser.close()
+                break  # Salir del bucle de reintentos
+
             except Exception as e:
                 raise RuntimeError(f"Error en el proceso: {str(e)}")
+
+    if not proceso_completado:
+        raise RuntimeError("Todos los intentos de creación de Apple ID fallaron.")
 
 """
 Función que manejará hilos por usuario con un máximo de 3
