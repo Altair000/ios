@@ -59,7 +59,7 @@ def iniciar(chat_id, update_progress):
 
             iframe_locator = page.locator("iframe[title='Crear tu cuenta de Apple']")
             iframe = iframe_locator.content_frame
-            print(iframe)
+            print(page.content())
 
             # Llenar formulario de registro
             # Nombre
