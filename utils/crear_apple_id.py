@@ -38,7 +38,7 @@ def iniciar(chat_id, update_progress):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         iphone_13 = p.devices['iPhone 13']
-        context = browser.new_context(**iphone_13)
+        context = browser.new_context()
         page = context.new_page()
 
         try:
@@ -59,7 +59,6 @@ def iniciar(chat_id, update_progress):
 
             iframe_locator = page.locator("iframe[title='Crear tu cuenta de Apple']")
             iframe = iframe_locator.content_frame
-            print(page.content())
 
             # Llenar formulario de registro
             # Nombre
