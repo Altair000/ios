@@ -67,7 +67,7 @@ def iniciar(chat_id, update_progress):
             update_progress("Introduciendo primer nombre...", (step_count / total_steps) * 100)
             time.sleep(1)
 
-            iframe.locator('label[class="form-textbox-label"]', has_text='Nombre').click()
+            iframe.locator('label.form-textbox-label', has_text='Nombre').click()
             iframe.locator('input[name="firstName"]').type(NOMBRE, delay=150)
 
             # Apellido
